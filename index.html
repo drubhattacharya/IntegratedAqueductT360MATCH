@@ -5412,7 +5412,7 @@ document.getElementById("btn_process").addEventListener("click", async ()=>{
   }
 });
 
-document.getElementById("btn_use_top").addEventListener("click", ()=>{
+const _btnUseTop = document.getElementById("btn_use_top"); if(_btnUseTop) _btnUseTop.addEventListener("click", ()=>{
   if(!state.opportunities.length){
     showErr("No Tier 2 opportunities available yet.");
     return;
