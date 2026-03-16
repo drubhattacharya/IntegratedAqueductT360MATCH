@@ -4064,15 +4064,27 @@ function checkSetupComplete(){
 
   Q.facilitySetupComplete = true;
 
+  // Enable the Continue button
+  const nextBtn = document.getElementById("step1-next");
+  if(nextBtn) nextBtn.disabled = false;
+
   // Update header chip
   const chip = document.getElementById("facility_chip");
-  if(chip){ chip.textContent = fname || ftype; chip.style.display = ""; }
+  if(chip){ chip.textContent = fname + (document.getElementById("q_state") ? " · " + document.getElementById("q_state").value : ""); chip.style.display = ""; }
 
   // Update left panel summary
   updateLeftSummary();
+}
 
-  // Show opportunity discovery panel and populate it
-  surfaceOpportunities();
+function advanceToStep2(){
+  // Open Step 2 section
+  const body2 = document.getElementById("qdata_body");
+  if(body2) body2.style.display = "";
+  // Scroll to Step 2
+  const s2 = document.querySelector(".q-section:nth-child(2)");
+  if(s2) s2.scrollIntoView({behavior:"smooth", block:"start"});
+  // If sample was already loaded, surface opportunities now
+  if(window.facilityProfile && window.facilityProfile.name) surfaceOpportunities();
 }
 
 function updateLeftSummary(){
@@ -4909,6 +4921,16 @@ function loadSampleDataset(){
     status.innerHTML = `✓ Built-in sample dataset loaded: <b>Riverside Community Health System</b> · 12-month NEMT pilot data (Jan–Dec 2024)`;
   }
   showOk("Sample dataset loaded. ROI, Compliance, Operations, and Outcomes tabs are now populated.");
+  // Enable step 1 continue button
+  const nextBtn = document.getElementById("step1-next");
+  if(nextBtn) nextBtn.disabled = false;
+  // Reveal Step 3 opportunity discovery panel
+  if (typeof surfaceOpportunities === 'function') surfaceOpportunities();
+  // Scroll to it
+  setTimeout(function(){
+    const disc = document.getElementById("opp_discovery");
+    if(disc) disc.scrollIntoView({behavior:"smooth", block:"start"});
+  }, 300);
 }
 
 
