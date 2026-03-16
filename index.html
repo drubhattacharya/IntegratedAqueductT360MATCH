@@ -818,125 +818,6 @@ input[type="file"]:hover{
 .module-launch{width:100%;background:linear-gradient(135deg,#0d9488,#14b8a6);color:#fff;border:none;border-radius:8px;padding:11px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;}
 /* hidden required elements */
 .hidden-required{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
-
-/* ── Mayo White-Glove Styles ──────────────────────────────────── */
-.mayo-shell { font-family: inherit; }
-.mayo-masthead {
-  background: linear-gradient(135deg, #004B87 0%, #0C1A2E 100%);
-  border-radius: 14px; padding: 28px 32px 24px; color: #fff; margin-bottom: 0;
-  position: relative; overflow: hidden;
-}
-.mayo-masthead::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 80% 20%, rgba(201,162,39,.15), transparent 60%);
-  pointer-events: none;
-}
-.mayo-masthead-inner {
-  display: flex; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; position: relative;
-}
-.mayo-logo-badge { flex-shrink: 0; margin-top: 4px; }
-.mayo-eyebrow {
-  font-size: 10px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: .12em; color: rgba(201,162,39,.8); margin-bottom: 6px;
-}
-.mayo-headline {
-  font-size: clamp(20px,2.5vw,28px); font-weight: 800; margin: 0 0 6px;
-  letter-spacing: -.02em; line-height: 1.2;
-}
-.mayo-headline span { color: #C9A227; }
-.mayo-sub { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.65; margin: 0; max-width: 580px; }
-
-/* Progress Rail */
-.mayo-progress-rail {
-  display: flex; align-items: center; gap: 0; flex-wrap: wrap;
-  position: relative; padding: 0 4px;
-}
-.mayo-rail-step {
-  display: flex; align-items: center; gap: 8px; padding: 8px 14px 8px 10px;
-  border-radius: 8px; cursor: pointer; transition: background .2s;
-  position: relative; flex-shrink: 0;
-}
-.mayo-rail-step:hover { background: rgba(255,255,255,.08); }
-.mayo-rail-step.active { background: rgba(201,162,39,.18); }
-.mayo-rail-step.done .mayo-rail-num { background: rgba(201,162,39,.3); color: #C9A227; }
-.mayo-rail-step.done .mayo-rail-check { opacity: 1; }
-.mayo-rail-num {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: rgba(255,255,255,.12); color: rgba(255,255,255,.5);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; font-weight: 800; flex-shrink: 0; transition: all .2s;
-}
-.mayo-rail-step.active .mayo-rail-num { background: #C9A227; color: #0C1A2E; }
-.mayo-rail-label { font-size: 11px; font-weight: 600; color: rgba(255,255,255,.6); }
-.mayo-rail-step.active .mayo-rail-label { color: #fff; font-weight: 700; }
-.mayo-rail-check { font-size: 10px; color: #C9A227; opacity: 0; transition: opacity .2s; margin-left: 2px; }
-.mayo-rail-connector {
-  width: 20px; height: 1px; background: rgba(255,255,255,.15); flex-shrink: 0;
-}
-
-/* Step panels */
-.mayo-content { padding: 0; }
-/* Mayo step panels — slide-in on entry only */
-.mayo-content {
-  background: var(--card);
-  border-radius: 0 0 14px 14px;
-  border: 1px solid rgba(15,23,42,.08);
-  border-top: none;
-}
-.mayo-step {
-  display: none;
-}
-.mayo-step.active {
-  display: block;
-  animation: mayo-slide-in .35s cubic-bezier(.4,0,.2,1) both;
-}
-@keyframes mayo-slide-in {
-  from { opacity: 0; transform: translateX(40px); }
-  to   { opacity: 1; transform: none; }
-}
-.mayo-step.slide-out-left {
-  display: none;
-}
-
-.mayo-step-header {
-  display: flex; align-items: flex-start; gap: 16px;
-  padding-bottom: 20px; border-bottom: 1px solid var(--border);
-  margin-bottom: 24px;
-}
-.mayo-step-num-badge {
-  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
-  background: linear-gradient(135deg, #C9A227, #E8C84A);
-  color: #0C1A2E; display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 800; margin-top: 2px;
-}
-.mayo-step-icon { font-size: 20px; margin-bottom: 4px; }
-.mayo-step-title { font-size: 18px; font-weight: 800; color: var(--navy); margin: 0 0 4px; letter-spacing: -.01em; }
-.mayo-step-sub { font-size: 13px; color: var(--muted); margin: 0; }
-
-/* Bridge and navigation footer */
-.mayo-step-footer {
-  margin-top: 28px; padding-top: 24px;
-  border-top: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 20px; flex-wrap: wrap;
-}
-.mayo-bridge {
-  font-size: 13px; color: var(--muted); line-height: 1.65;
-  flex: 1; min-width: 240px; max-width: 560px;
-  font-style: italic;
-  padding-left: 12px;
-  border-left: 3px solid rgba(201,162,39,.4);
-}
-.mayo-next-btn {
-  background: linear-gradient(135deg, #C9A227, #B8A020);
-  color: #0C1A2E; border: none; border-radius: 10px;
-  padding: 13px 24px; font-size: 14px; font-weight: 800;
-  cursor: pointer; font-family: inherit; white-space: nowrap;
-  letter-spacing: .01em; flex-shrink: 0; transition: opacity .15s;
-}
-.mayo-next-btn:hover { opacity: .9; }
-/* ── End Mayo Styles ── */
-
 </style>
 </head>
 <body>
@@ -1545,81 +1426,38 @@ input[type="file"]:hover{
     </section>
 
     <!-- Mayo Demo (mayo) -->
-    
-
-  </div><!-- /right card -->
+    <!-- /right card -->
 </div><!-- /main_grid -->
 
-<div id="view_mayo" class="view">
+<div id="view_mayo" class="view" style="margin-top:24px;">
+    <div class="card" style="border-top:4px solid #C9A227; padding:0;">
 
-<!-- Mayo White-Glove Wrapper -->
-<div class="mayo-shell">
-
-  <!-- ── Masthead ── -->
-  <div class="mayo-masthead">
-    <div class="mayo-masthead-inner">
-      <div class="mayo-logo-badge">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="16" fill="#C9A227" opacity=".15"/><path d="M16 6v20M6 16h20" stroke="#C9A227" stroke-width="2.5" stroke-linecap="round"/></svg>
-      </div>
-      <div>
-        <div class="mayo-eyebrow">Aqueduct T360 MATCH · White-Glove Demo</div>
-        <h2 class="mayo-headline">Mayo Clinic <span>NEMT Program</span></h2>
-        <p class="mayo-sub">A guided walkthrough from 2025 Olmsted County CHNA evidence through CRA bank funding — built on Mayo's unique data infrastructure.</p>
-      </div>
-    </div>
-    <!-- Progress rail -->
-    <div class="mayo-progress-rail" id="mayo_rail">
-      <div class="mayo-rail-step active" id="rail_chna" onclick="mayoJumpTo('chna')">
-        <div class="mayo-rail-num">01</div>
-        <div class="mayo-rail-label">Your Community's Health Needs</div>
-        <div class="mayo-rail-check">✓</div>
-      </div>
-      <div class="mayo-rail-connector"></div>
-      <div class="mayo-rail-step " id="rail_linkage" onclick="mayoJumpTo('linkage')">
-        <div class="mayo-rail-num">02</div>
-        <div class="mayo-rail-label">CHNA Priority → CRA Funding Map</div>
-        <div class="mayo-rail-check">✓</div>
-      </div>
-      <div class="mayo-rail-connector"></div>
-      <div class="mayo-rail-step " id="rail_roi" onclick="mayoJumpTo('roi')">
-        <div class="mayo-rail-num">03</div>
-        <div class="mayo-rail-label">ROI Model at Mayo Scale</div>
-        <div class="mayo-rail-check">✓</div>
-      </div>
-      <div class="mayo-rail-connector"></div>
-      <div class="mayo-rail-step " id="rail_cra" onclick="mayoJumpTo('cra')">
-        <div class="mayo-rail-num">04</div>
-        <div class="mayo-rail-label">CRA Application Builder</div>
-        <div class="mayo-rail-check">✓</div>
-      </div>
-      <div class="mayo-rail-connector"></div>
-      <div class="mayo-rail-step " id="rail_banks" onclick="mayoJumpTo('banks')">
-        <div class="mayo-rail-num">05</div>
-        <div class="mayo-rail-label">Bank Engagement Strategy</div>
-        <div class="mayo-rail-check">✓</div>
-      </div>
-      <div class="mayo-rail-connector"></div>
-      <div class="mayo-rail-step " id="rail_draft" onclick="mayoJumpTo('draft')">
-        <div class="mayo-rail-num">06</div>
-        <div class="mayo-rail-label">Generative Artifact Suite</div>
-        <div class="mayo-rail-check">✓</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── Step Panels ── -->
-  <div class="mayo-content">
-    <div class="mayo-step active" id="mstep_chna">
-      <div class="mayo-step-header">
-        <div class="mayo-step-num-badge">01</div>
-        <div>
-          <div class="mayo-step-icon">🏥</div>
-          <h3 class="mayo-step-title">Your Community's Health Needs</h3>
-          <p class="mayo-step-sub">2025 Olmsted County CHNA — Three Priorities, Four Evidence Nodes</p>
+      <!-- Masthead -->
+      <div style="background:linear-gradient(135deg,#004B87,#0C1A2E);border-radius:10px 10px 0 0;padding:20px 24px;color:#fff;">
+        <div style="display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;">
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#C9A227,#E8C84A);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;color:#004B87;flex-shrink:0;margin-top:2px;">MC</div>
+          <div style="flex:1;min-width:200px;">
+            <div style="font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:3px;">Advanced Demo — Mayo Clinic · Olmsted County</div>
+            <div style="font-size:20px;font-weight:800;line-height:1.2;">CHNA-to-CRA Strategic Investment Navigator</div>
+            <div style="font-size:12px;color:rgba(255,255,255,.55);margin-top:3px;">2025 Olmsted County CHNA (Oct 7 2025) · Rochester MSA Assessment Area (Olmsted + Dodge Counties, MN)</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;">
+          <button onclick="mayoNav('chna')" id="mn_chna" class="mayo-subnav active-subnav">CHNA Evidence</button>
+          <button onclick="mayoNav('linkage')" id="mn_linkage" class="mayo-subnav">CHNA&rarr;CRA Map</button>
+          <button onclick="mayoNav('roi')" id="mn_roi" class="mayo-subnav">ROI at Scale</button>
+          <button onclick="mayoNav('cra')" id="mn_cra" class="mayo-subnav">CRA Application</button>
+          <button onclick="mayoNav('banks')" id="mn_banks" class="mayo-subnav">Bank Engagement</button>
+          <button onclick="mayoNav('draft')" id="mn_draft" class="mayo-subnav mayo-subnav-gold">Generate Draft</button>
         </div>
       </div>
-      <div class="mayo-step-body" id="mpanel_chna">
-        <div class="section-title" style="font-size:17px;margin-bottom:4px;">2025 Olmsted County CHNA &mdash; Three Priorities, Four Evidence Nodes</div>
+
+      <!-- Panel container -->
+      <div style="padding:24px;">
+
+        <!-- PANEL: CHNA Evidence -->
+        <div id="mpanel_chna">
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">2025 Olmsted County CHNA &mdash; Three Priorities, Four Evidence Nodes</div>
           <p class="small" style="margin-bottom:16px;">Produced collaboratively by Mayo Clinic, Olmsted Medical Center, and Olmsted County Public Health Services. Available at <a href="https://storymaps.arcgis.com/collections/7651105f080c418891d71862b91ed210" target="_blank" style="color:var(--blue);">storymaps.arcgis.com</a>. Click each node to expand the NEMT connection.</p>
           <div class="kpis" style="margin-bottom:18px;">
             <div class="kpi"><div class="label">Priority #1 &mdash; Access to Care</div><div class="value" style="font-size:26px;">34%</div><div class="hint">of adults delayed care (2024 survey, N=937); 15% lack a PCP; top barrier: can&rsquo;t get appointment</div></div>
@@ -1684,27 +1522,8 @@ input[type="file"]:hover{
         </div>
 
         <!-- PANEL: Linkage Map -->
-        <div
-      </div>
-      
-    <div class="mayo-step-footer">
-      <div class="mayo-bridge">These priorities are the foundation of your CRA case. Each one maps directly to a fundable community benefit — and Mayo's data infrastructure gives you the attribution depth no other health system in Rochester can match.</div>
-      <button class="mayo-next-btn" onclick="mayoAdvance('chna', 'linkage')">
-        Map to CRA Funding →
-      </button>
-    </div>
-    </div>
-    <div class="mayo-step " id="mstep_linkage">
-      <div class="mayo-step-header">
-        <div class="mayo-step-num-badge">02</div>
-        <div>
-          <div class="mayo-step-icon">🔗</div>
-          <h3 class="mayo-step-title">CHNA Priority → CRA Funding Map</h3>
-          <p class="mayo-step-sub">How each documented need becomes a qualifying CRA activity</p>
-        </div>
-      </div>
-      <div class="mayo-step-body" id="mpanel_linkage">
-        <div class="section-title" style="font-size:17px;margin-bottom:4px;">CHNA Priority &rarr; NEMT Program &rarr; CRA Activity Mapping</div>
+        <div id="mpanel_linkage" style="display:none;">
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">CHNA Priority &rarr; NEMT Program &rarr; CRA Activity Mapping</div>
           <p class="small" style="margin-bottom:16px;">Maps each 2025 CHNA priority to program elements, CRA classification, and Schedule H pathway &mdash; the evidence chain you present to banks. Rochester MSA Assessment Area = all of Olmsted County + all of Dodge County (confirmed by OCC examinations).</p>
           <div style="overflow-x:auto;margin-bottom:18px;">
             <table class="tbl" style="min-width:860px;font-size:13px;">
@@ -1726,27 +1545,8 @@ input[type="file"]:hover{
         </div>
 
         <!-- PANEL: ROI at Mayo Scale -->
-        <div
-      </div>
-      
-    <div class="mayo-step-footer">
-      <div class="mayo-bridge">You've established the need. Now see exactly which federal CRA criteria each priority satisfies — this is the translation that makes community benefit spend eligible for bank investment.</div>
-      <button class="mayo-next-btn" onclick="mayoAdvance('linkage', 'roi')">
-        Build the ROI Model →
-      </button>
-    </div>
-    </div>
-    <div class="mayo-step " id="mstep_roi">
-      <div class="mayo-step-header">
-        <div class="mayo-step-num-badge">03</div>
-        <div>
-          <div class="mayo-step-icon">💰</div>
-          <h3 class="mayo-step-title">ROI Model at Mayo Scale</h3>
-          <p class="mayo-step-sub">Full four-layer financial analysis calibrated to Mayo's visit volume and payer mix</p>
-        </div>
-      </div>
-      <div class="mayo-step-body" id="mpanel_roi">
-        <div class="section-title" style="font-size:17px;margin-bottom:4px;">Full ROI Model &mdash; Mayo Clinic / Olmsted County Scale</div>
+        <div id="mpanel_roi" style="display:none;">
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">Full ROI Model &mdash; Mayo Clinic / Olmsted County Scale</div>
           <p class="small" style="margin-bottom:4px;">59,421 Olmsted County patients in 2024 · 42,103 inpatient admissions · 84,800 ER visits · REP longitudinal population data since 1966. Defaults calibrated to Mayo's ambulatory pilot scale. Enable all layers to build the complete value stack.</p>
           <div id="mayo_l0_summary" style="margin-bottom:14px;display:none;background:rgba(201,162,39,.07);border-left:3px solid #C9A227;border-radius:8px;padding:10px 14px;"></div>
 
@@ -1909,27 +1709,8 @@ input[type="file"]:hover{
         </div>
 
         <!-- PANEL: CRA Application -->
-        <div
-      </div>
-      
-    <div class="mayo-step-footer">
-      <div class="mayo-bridge">With the financial case confirmed, you have everything needed to build a compelling bank application. The numbers you just generated populate the CRA builder automatically.</div>
-      <button class="mayo-next-btn" onclick="mayoAdvance('roi', 'cra')">
-        Build CRA Application →
-      </button>
-    </div>
-    </div>
-    <div class="mayo-step " id="mstep_cra">
-      <div class="mayo-step-header">
-        <div class="mayo-step-num-badge">04</div>
-        <div>
-          <div class="mayo-step-icon">📋</div>
-          <h3 class="mayo-step-title">CRA Application Builder</h3>
-          <p class="mayo-step-sub">Five-section OCC/FDIC-ready justification memo</p>
-        </div>
-      </div>
-      <div class="mayo-step-body" id="mpanel_cra">
-        <div class="section-title" style="font-size:17px;margin-bottom:4px;">CRA Activity Justification Builder &mdash; Five Sections</div>
+        <div id="mpanel_cra" style="display:none;">
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">CRA Activity Justification Builder &mdash; Five Sections</div>
           <p class="small" style="margin-bottom:16px;">Pre-populated with 2025 Olmsted County CHNA data and Rochester MSA Assessment Area confirmation. Customize each field, then generate the draft document.</p>
           <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px;">
             <div style="background:linear-gradient(135deg,var(--navy),#1a3a5c);padding:11px 16px;display:flex;align-items:center;gap:10px;"><span style="font-size:20px;font-weight:900;color:#E8C84A;min-width:26px;">1</span><div><div style="font-size:13px;font-weight:700;color:#fff;">CHNA Citation &amp; Community Health Need</div><div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;">Required for IRS Schedule H and CRA community development credit</div></div></div>
@@ -1991,27 +1772,8 @@ input[type="file"]:hover{
         </div>
 
         <!-- PANEL: Bank Engagement -->
-        <div
-      </div>
-      
-    <div class="mayo-step-footer">
-      <div class="mayo-bridge">Your application is ready. Now identify the right banking partners — Rochester has seven institutions with CRA obligations in the Mayo service area, each at a different stage of rating cycle.</div>
-      <button class="mayo-next-btn" onclick="mayoAdvance('cra', 'banks')">
-        Identify Bank Partners →
-      </button>
-    </div>
-    </div>
-    <div class="mayo-step " id="mstep_banks">
-      <div class="mayo-step-header">
-        <div class="mayo-step-num-badge">05</div>
-        <div>
-          <div class="mayo-step-icon">🏦</div>
-          <h3 class="mayo-step-title">Bank Engagement Strategy</h3>
-          <p class="mayo-step-sub">Rochester MSA Assessment Area — rated institutions and consortium approach</p>
-        </div>
-      </div>
-      <div class="mayo-step-body" id="mpanel_banks">
-        <div class="section-title" style="font-size:17px;margin-bottom:4px;">Bank Engagement &mdash; Rochester MSA Assessment Area</div>
+        <div id="mpanel_banks" style="display:none;">
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">Bank Engagement &mdash; Rochester MSA Assessment Area</div>
           <p class="small" style="margin-bottom:14px;">The Rochester MSA AA (Olmsted + Dodge counties) includes national, regional, and community banks all subject to CRA. Click each institution for a tailored pitch approach based on CRA exam history.</p>
           <div class="callout" style="border-left:4px solid #C9A227;background:rgba(201,162,39,.06);margin-bottom:16px;"><strong style="color:#7A5C00;">&#127919; Mayo&rsquo;s Strategic Advantage</strong><p class="small" style="margin-top:5px;">Mayo Clinic is the largest employer in Olmsted County. A CRA partnership with Mayo carries reputational value that bank CRA officers actively seek &mdash; it is a marquee exam file relationship. Lead with institutional standing, not dollar amount, then present the complete evidence package.</p></div>
           <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:18px;">
@@ -2073,27 +1835,8 @@ input[type="file"]:hover{
         </div>
 
         <!-- PANEL: Generate Artifacts -->
-        <div
-      </div>
-      
-    <div class="mayo-step-footer">
-      <div class="mayo-bridge">You know who to approach and in what order. Now generate the complete document suite — seven audit-ready artifacts that make your package immediately actionable.</div>
-      <button class="mayo-next-btn" onclick="mayoAdvance('banks', 'draft')">
-        Generate Your Documents →
-      </button>
-    </div>
-    </div>
-    <div class="mayo-step " id="mstep_draft">
-      <div class="mayo-step-header">
-        <div class="mayo-step-num-badge">06</div>
-        <div>
-          <div class="mayo-step-icon">✨</div>
-          <h3 class="mayo-step-title">Generative Artifact Suite</h3>
-          <p class="mayo-step-sub">Seven documents ready to download, adapt, and send</p>
-        </div>
-      </div>
-      <div class="mayo-step-body" id="mpanel_draft">
-        <div class="section-title" style="font-size:17px;margin-bottom:4px;">&#127775; Generative Artifact Suite &mdash; Mayo Clinic NEMT Program</div>
+        <div id="mpanel_draft" style="display:none;">
+          <div class="section-title" style="font-size:17px;margin-bottom:4px;">&#127775; Generative Artifact Suite &mdash; Mayo Clinic NEMT Program</div>
           <p class="small" style="margin-bottom:14px;">Seven high-value artifacts pre-populated with 2025 Olmsted County CHNA data and your ROI model inputs. Each saves 4&ndash;8 hours of preparation. Generate, review, copy, and adapt. All financial figures pull live from the ROI model.</p>
 
           <!-- Artifact button grid -->
@@ -2162,11 +1905,13 @@ input[type="file"]:hover{
           </div>
         </div>
 
-      </div><!-- /panel cont
-      </div>
-      
+      </div><!-- /panel container -->
     </div>
+
   </div>
+
+
+
 
 
 <!-- Training view (full-width, outside main_grid) -->
@@ -6791,7 +6536,7 @@ window.toggleReveal = function(id){
 // MAYO / ADVANCED CHNA MODULE JS
 // ═══════════════════════════════════════════════════════════
 
-// mayoNav: handled by guided navigation
+// mayoNav defined in mayo module below
 
 window.toggleMEN = function(n) {
   const isOpen = document.getElementById('men'+n+'_body').style.display !== 'none';
@@ -8238,61 +7983,21 @@ function resetAll() {
 
 
 
-/* ── Mayo Navigation JS ── */
-
-// ── Mayo guided navigation ─────────────────────────────────────
-var _mayoCompleted = {};
-
-window.mayoAdvance = function(fromId, toId) {
-  _mayoCompleted[fromId] = true;
-  var railFrom = document.getElementById('rail_' + fromId);
-  if (railFrom) railFrom.classList.add('done');
-  mayoShowStep(toId, fromId);
-};
-
-window.mayoShowStep = function(toId, fromId) {
-  // Update rail
-  document.querySelectorAll('.mayo-rail-step').forEach(function(el) {
-    el.classList.remove('active');
-  });
-  var railEl = document.getElementById('rail_' + toId);
-  if (railEl) railEl.classList.add('active');
-
-  // Hide all steps, show target with slide-in animation
-  document.querySelectorAll('.mayo-step').forEach(function(el) {
-    el.classList.remove('active', 'slide-out-left', 'slide-in-right');
-  });
-  var toEl = document.getElementById('mstep_' + toId);
-  if (!toEl) return;
-
-  // Force animation replay by removing and re-adding active
-  void toEl.offsetWidth;
-  toEl.classList.add('active');
-
-  // Trigger ROI calc if needed
-  if (toId === 'roi') {
-    setTimeout(function(){ if(typeof calcMayoROI==='function') calcMayoROI(); }, 100);
-  }
-};
-
-window.mayoJumpTo = function(toId) {
-  var cur = document.querySelector('.mayo-step.active');
-  var fromId = cur ? cur.id.replace('mstep_', '') : null;
-  if (fromId !== toId) mayoShowStep(toId, fromId);
-};
-
-// Legacy mayoNav compatibility (called from existing panel button code)
-window.mayoNav = function(panel) {
-  mayoShowStep(panel);
-};
-
-
 /* ── Mayo Module JS ── */
 //
 // MAYO / ADVANCED CHNA MODULE JS
 //
 
-// mayoNav handled by mayoShowStep above
+window.mayoNav = function(panel) {
+  ['chna','linkage','roi','cra','banks','draft'].forEach(p => {
+    const el = document.getElementById('mpanel_' + p);
+    if (el) el.style.display = (p === panel) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.mayo-subnav').forEach(b => b.classList.remove('active-subnav'));
+  const btn = document.getElementById('mn_' + panel);
+  if (btn) btn.classList.add('active-subnav');
+  if (panel === 'roi') { setTimeout(calcMayoROI, 60); }
+};
 
 window.toggleMEN = function(n) {
   const isOpen = document.getElementById('men'+n+'_body').style.display !== 'none';
@@ -9125,6 +8830,4 @@ window.downloadMayoDraft = function() {
 
 </script>
 </body>
-</html><!-- /mayo-content -->
-</div><!-- /mayo-shell -->
-</div><!-- /view_mayo -->
+</html>
