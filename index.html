@@ -4077,22 +4077,28 @@ function checkSetupComplete(){
 }
 
 function advanceToStep2(){
-  // Scroll to the sample dataset CTA
-  const sampleBtn = document.querySelector(".sample-load-btn");
-  const sampleCard = document.getElementById("sample-cta-card");
-  const target = sampleCard || sampleBtn || document.getElementById("qdata_body");
-  if(target) target.scrollIntoView({behavior:"smooth", block:"center"});
-  // Flash highlight to draw attention
-  const card = document.getElementById("sample-cta-card");
-  if(card){
-    card.style.transition = "box-shadow .2s";
-    card.style.boxShadow = "0 0 0 3px var(--teal), 0 4px 24px rgba(13,148,136,.3)";
-    setTimeout(()=>{ card.style.boxShadow = ""; }, 1800);
-  }
-  // If data already loaded, go straight to opportunities
+  // SHOW the Step 2 section (it starts hidden)
+  const step2 = document.getElementById("step2-section");
+  if(step2){ step2.style.display = ""; }
+  // Also ensure the body inside is open
+  const body2 = document.getElementById("qdata_body");
+  if(body2){ body2.style.display = ""; }
+  // Scroll to it after a tick so display change renders first
+  setTimeout(function(){
+    const card = document.getElementById("sample-cta-card");
+    const target = card || body2 || step2;
+    if(target) target.scrollIntoView({behavior:"smooth", block:"center"});
+    // Flash highlight
+    if(card){
+      card.style.transition = "box-shadow .3s";
+      card.style.boxShadow = "0 0 0 3px var(--teal), 0 4px 24px rgba(13,148,136,.3)";
+      setTimeout(function(){ card.style.boxShadow = ""; }, 1800);
+    }
+  }, 60);
+  // If data already loaded, also surface opportunities
   if(window.facilityProfile && window.facilityProfile.name){
-    surfaceOpportunities();
-    setTimeout(()=>{
+    setTimeout(function(){
+      surfaceOpportunities();
       const disc = document.getElementById("opp_discovery");
       if(disc) disc.scrollIntoView({behavior:"smooth", block:"start"});
     }, 400);
