@@ -876,14 +876,44 @@ input[type="file"]:hover{
 
 /* Step panels */
 .mayo-content { padding: 0; }
-.mayo-step {
-  display: none; animation: mayo-in .3s ease-out;
-  background: var(--card); border-radius: 0 0 14px 14px;
-  border: 1px solid rgba(15,23,42,.08); border-top: none;
-  padding: 28px 32px;
+/* Mayo horizontal slideshow */
+.mayo-content {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  border-radius: 0 0 14px 14px;
+  border: 1px solid rgba(15,23,42,.08);
+  border-top: none;
+  min-height: 520px;
 }
-.mayo-step.active { display: block; }
-@keyframes mayo-in { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+.mayo-step {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  padding: 28px 32px;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .35s ease;
+  will-change: transform, opacity;
+}
+.mayo-step.active {
+  position: relative;
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.mayo-step.slide-out-left {
+  position: absolute;
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+.mayo-step.slide-in-right {
+  position: absolute;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
 
 .mayo-step-header {
   display: flex; align-items: flex-start; gap: 16px;
@@ -8235,60 +8265,63 @@ window.mayoAdvance = function(fromId, toId) {
   _mayoCompleted[fromId] = true;
   var railFrom = document.getElementById('rail_' + fromId);
   if (railFrom) railFrom.classList.add('done');
-
-  // Hide current step with a slide-out feel
-  var stepFrom = document.getElementById('mstep_' + fromId);
-  if (stepFrom) {
-    stepFrom.style.opacity = '0';
-    stepFrom.style.transform = 'translateY(-8px)';
-    setTimeout(function() {
-      stepFrom.classList.remove('active');
-      stepFrom.style.opacity = '';
-      stepFrom.style.transform = '';
-      mayoShowStep(toId);
-    }, 220);
-  } else {
-    mayoShowStep(toId);
-  }
+  // Horizontal slide to next step — no page scroll
+  mayoShowStep(toId, fromId);
 };
 
-window.mayoShowStep = function(id) {
+window.mayoShowStep = function(toId, fromId) {
   // Update rail
   document.querySelectorAll('.mayo-rail-step').forEach(function(el) {
     el.classList.remove('active');
   });
-  var railEl = document.getElementById('rail_' + id);
+  var railEl = document.getElementById('rail_' + toId);
   if (railEl) railEl.classList.add('active');
 
-  // Show step with slide-in
-  var stepEl = document.getElementById('mstep_' + id);
-  if (!stepEl) return;
-  stepEl.style.opacity = '0';
-  stepEl.style.transform = 'translateY(12px)';
-  stepEl.classList.add('active');
-  requestAnimationFrame(function() {
+  var toEl = document.getElementById('mstep_' + toId);
+  if (!toEl) return;
+
+  // Find current active step if fromId not specified
+  if (!fromId) {
+    var cur = document.querySelector('.mayo-step.active');
+    if (cur && cur.id !== 'mstep_' + toId) fromId = cur.id.replace('mstep_', '');
+  }
+
+  var fromEl = fromId ? document.getElementById('mstep_' + fromId) : null;
+
+  if (fromEl && fromEl !== toEl) {
+    // Slide current out to left, bring new in from right
+    fromEl.classList.add('slide-out-left');
+    fromEl.classList.remove('active');
+
+    toEl.classList.add('slide-in-right');
+    toEl.classList.remove('active');
+
+    // Force reflow so transition fires
+    void toEl.offsetWidth;
+
     requestAnimationFrame(function() {
-      stepEl.style.transition = 'opacity .3s ease, transform .3s ease';
-      stepEl.style.opacity = '1';
-      stepEl.style.transform = 'none';
-      setTimeout(function() { stepEl.style.transition = ''; }, 350);
+      toEl.classList.remove('slide-in-right');
+      toEl.classList.add('active');
+      setTimeout(function() {
+        fromEl.classList.remove('slide-out-left');
+        // Trigger ROI calc if needed
+        if (toId === 'roi') { if(typeof calcMayoROI==='function') calcMayoROI(); }
+      }, 420);
     });
-  });
-
-  // Scroll to top of mayo shell
-  var shell = document.querySelector('.mayo-shell');
-  if (shell) shell.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-  // Trigger ROI calc if ROI panel
-  if (id === 'roi') { setTimeout(function(){ if(typeof calcMayoROI==='function') calcMayoROI(); }, 100); }
+  } else {
+    // No animation needed (first load or direct jump)
+    document.querySelectorAll('.mayo-step').forEach(function(el) {
+      el.classList.remove('active', 'slide-out-left', 'slide-in-right');
+    });
+    toEl.classList.add('active');
+    if (toId === 'roi') { setTimeout(function(){ if(typeof calcMayoROI==='function') calcMayoROI(); }, 100); }
+  }
 };
 
-window.mayoJumpTo = function(id) {
-  // Allow clicking completed or adjacent steps in rail
-  document.querySelectorAll('.mayo-step.active').forEach(function(el){
-    el.classList.remove('active');
-  });
-  mayoShowStep(id);
+window.mayoJumpTo = function(toId) {
+  var cur = document.querySelector('.mayo-step.active');
+  var fromId = cur ? cur.id.replace('mstep_', '') : null;
+  if (fromId !== toId) mayoShowStep(toId, fromId);
 };
 
 // Legacy mayoNav compatibility (called from existing panel button code)
