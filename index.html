@@ -939,7 +939,7 @@ input:focus,select:focus,textarea:focus{outline:none; border-color:var(--teal); 
           <div class="qi-body" id="insight_type_text">Facility type selected — default benchmarks applied.</div>
         </div>
 
-        <button class="step-next-btn" id="step1-next" onclick="advanceToStep2()" disabled>
+        <button class="step-next-btn" id="step1-next" onclick="advanceToStep2()">
           Continue: Load Your Data →
         </button>
       </div>
@@ -963,7 +963,7 @@ input:focus,select:focus,textarea:focus{outline:none; border-color:var(--teal); 
         </div>
         <div class="data-load-grid">
           <!-- Primary CTA: Sample Dataset -->
-          <div class="sample-cta">
+          <div class="sample-cta" id="sample-cta-card">
             <div class="sample-cta-badge">✦ Recommended for this review</div>
             <h3>Sample FQHC Dataset</h3>
             <p>Pre-loaded with 12 months of realistic appointment, claims, and staffing data. All ROI, Compliance, and Operations tabs populate automatically from your questionnaire answers.</p>
@@ -4077,14 +4077,26 @@ function checkSetupComplete(){
 }
 
 function advanceToStep2(){
-  // Open Step 2 section
-  const body2 = document.getElementById("qdata_body");
-  if(body2) body2.style.display = "";
-  // Scroll to Step 2
-  const s2 = document.querySelector(".q-section:nth-child(2)");
-  if(s2) s2.scrollIntoView({behavior:"smooth", block:"start"});
-  // If sample was already loaded, surface opportunities now
-  if(window.facilityProfile && window.facilityProfile.name) surfaceOpportunities();
+  // Scroll to the sample dataset CTA
+  const sampleBtn = document.querySelector(".sample-load-btn");
+  const sampleCard = document.getElementById("sample-cta-card");
+  const target = sampleCard || sampleBtn || document.getElementById("qdata_body");
+  if(target) target.scrollIntoView({behavior:"smooth", block:"center"});
+  // Flash highlight to draw attention
+  const card = document.getElementById("sample-cta-card");
+  if(card){
+    card.style.transition = "box-shadow .2s";
+    card.style.boxShadow = "0 0 0 3px var(--teal), 0 4px 24px rgba(13,148,136,.3)";
+    setTimeout(()=>{ card.style.boxShadow = ""; }, 1800);
+  }
+  // If data already loaded, go straight to opportunities
+  if(window.facilityProfile && window.facilityProfile.name){
+    surfaceOpportunities();
+    setTimeout(()=>{
+      const disc = document.getElementById("opp_discovery");
+      if(disc) disc.scrollIntoView({behavior:"smooth", block:"start"});
+    }, 400);
+  }
 }
 
 function updateLeftSummary(){
