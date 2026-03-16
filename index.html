@@ -876,43 +876,26 @@ input[type="file"]:hover{
 
 /* Step panels */
 .mayo-content { padding: 0; }
-/* Mayo horizontal slideshow */
+/* Mayo step panels — slide-in on entry only */
 .mayo-content {
-  position: relative;
-  overflow: hidden;
   background: var(--card);
   border-radius: 0 0 14px 14px;
   border: 1px solid rgba(15,23,42,.08);
   border-top: none;
-  min-height: 520px;
 }
 .mayo-step {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  padding: 28px 32px;
-  transform: translateX(100%);
-  opacity: 0;
-  pointer-events: none;
-  transition: transform .4s cubic-bezier(.4,0,.2,1), opacity .35s ease;
-  will-change: transform, opacity;
+  display: none;
 }
 .mayo-step.active {
-  position: relative;
-  transform: translateX(0);
-  opacity: 1;
-  pointer-events: auto;
+  display: block;
+  animation: mayo-slide-in .35s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes mayo-slide-in {
+  from { opacity: 0; transform: translateX(40px); }
+  to   { opacity: 1; transform: none; }
 }
 .mayo-step.slide-out-left {
-  position: absolute;
-  transform: translateX(-100%);
-  opacity: 0;
-  pointer-events: none;
-}
-.mayo-step.slide-in-right {
-  position: absolute;
-  transform: translateX(100%);
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 
 .mayo-step-header {
@@ -8261,11 +8244,9 @@ function resetAll() {
 var _mayoCompleted = {};
 
 window.mayoAdvance = function(fromId, toId) {
-  // Mark current step complete
   _mayoCompleted[fromId] = true;
   var railFrom = document.getElementById('rail_' + fromId);
   if (railFrom) railFrom.classList.add('done');
-  // Horizontal slide to next step — no page scroll
   mayoShowStep(toId, fromId);
 };
 
@@ -8277,44 +8258,20 @@ window.mayoShowStep = function(toId, fromId) {
   var railEl = document.getElementById('rail_' + toId);
   if (railEl) railEl.classList.add('active');
 
+  // Hide all steps, show target with slide-in animation
+  document.querySelectorAll('.mayo-step').forEach(function(el) {
+    el.classList.remove('active', 'slide-out-left', 'slide-in-right');
+  });
   var toEl = document.getElementById('mstep_' + toId);
   if (!toEl) return;
 
-  // Find current active step if fromId not specified
-  if (!fromId) {
-    var cur = document.querySelector('.mayo-step.active');
-    if (cur && cur.id !== 'mstep_' + toId) fromId = cur.id.replace('mstep_', '');
-  }
+  // Force animation replay by removing and re-adding active
+  void toEl.offsetWidth;
+  toEl.classList.add('active');
 
-  var fromEl = fromId ? document.getElementById('mstep_' + fromId) : null;
-
-  if (fromEl && fromEl !== toEl) {
-    // Slide current out to left, bring new in from right
-    fromEl.classList.add('slide-out-left');
-    fromEl.classList.remove('active');
-
-    toEl.classList.add('slide-in-right');
-    toEl.classList.remove('active');
-
-    // Force reflow so transition fires
-    void toEl.offsetWidth;
-
-    requestAnimationFrame(function() {
-      toEl.classList.remove('slide-in-right');
-      toEl.classList.add('active');
-      setTimeout(function() {
-        fromEl.classList.remove('slide-out-left');
-        // Trigger ROI calc if needed
-        if (toId === 'roi') { if(typeof calcMayoROI==='function') calcMayoROI(); }
-      }, 420);
-    });
-  } else {
-    // No animation needed (first load or direct jump)
-    document.querySelectorAll('.mayo-step').forEach(function(el) {
-      el.classList.remove('active', 'slide-out-left', 'slide-in-right');
-    });
-    toEl.classList.add('active');
-    if (toId === 'roi') { setTimeout(function(){ if(typeof calcMayoROI==='function') calcMayoROI(); }, 100); }
+  // Trigger ROI calc if needed
+  if (toId === 'roi') {
+    setTimeout(function(){ if(typeof calcMayoROI==='function') calcMayoROI(); }, 100);
   }
 };
 
