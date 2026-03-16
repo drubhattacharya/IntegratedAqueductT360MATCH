@@ -6778,16 +6778,7 @@ window.toggleReveal = function(id){
 // MAYO / ADVANCED CHNA MODULE JS
 // ═══════════════════════════════════════════════════════════
 
-window.mayoNav = function(panel) {
-  ['chna','linkage','roi','cra','banks','draft'].forEach(p => {
-    const el = document.getElementById('mpanel_' + p);
-    if (el) el.style.display = (p === panel) ? 'block' : 'none';
-  });
-  document.querySelectorAll('.mayo-subnav').forEach(b => b.classList.remove('active-subnav'));
-  const btn = document.getElementById('mn_' + panel);
-  if (btn) btn.classList.add('active-subnav');
-  if (panel === 'roi') { setTimeout(calcMayoROI, 60); }
-};
+// mayoNav: handled by guided navigation
 
 window.toggleMEN = function(n) {
   const isOpen = document.getElementById('men'+n+'_body').style.display !== 'none';
@@ -8311,16 +8302,7 @@ window.mayoNav = function(panel) {
 // MAYO / ADVANCED CHNA MODULE JS
 //
 
-window.mayoNav = function(panel) {
-  ['chna','linkage','roi','cra','banks','draft'].forEach(p => {
-    const el = document.getElementById('mpanel_' + p);
-    if (el) el.style.display = (p === panel) ? 'block' : 'none';
-  });
-  document.querySelectorAll('.mayo-subnav').forEach(b => b.classList.remove('active-subnav'));
-  const btn = document.getElementById('mn_' + panel);
-  if (btn) btn.classList.add('active-subnav');
-  if (panel === 'roi') { setTimeout(calcMayoROI, 60); }
-};
+// mayoNav handled by mayoShowStep above
 
 window.toggleMEN = function(n) {
   const isOpen = document.getElementById('men'+n+'_body').style.display !== 'none';
